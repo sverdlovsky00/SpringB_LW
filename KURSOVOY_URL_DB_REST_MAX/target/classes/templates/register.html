@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title>Регистрация</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">
+                        <i class="fas fa-user-plus me-2"></i>Регистрация
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Error Alert -->
+                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <span th:text="${error}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
+                    <!-- Registration Form -->
+                    <form th:action="@{/register}" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-user me-2"></i>Имя пользователя
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <input type="text" class="form-control" id="username" name="username"
+                                       th:value="${username}"
+                                       placeholder="Придумайте имя пользователя" required>
+                            </div>
+                            <div class="form-text">Имя пользователя должно быть уникальным.</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock me-2"></i>Пароль
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Придумайте надежный пароль" required>
+                            </div>
+                            <div class="form-text">Пароль должен содержать минимум 3 символа.</div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>Зарегистрироваться
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Additional Links -->
+                    <div class="text-center mt-4">
+                        <p class="mb-3">Уже есть аккаунт?</p>
+                        <a th:href="@{/login}" class="btn btn-outline-primary">
+                            <i class="fas fa-sign-in-alt me-2"></i>Войти в систему
+                        </a>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <a th:href="@{/}" class="btn btn-link text-decoration-none">
+                            <i class="fas fa-arrow-left me-2"></i>Вернуться на главную
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Benefits -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <i class="fas fa-gift me-2 text-success"></i>Преимущества регистрации
+                    </h6>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <small>Доступ к управлению книгами</small>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <small>Ведение списка магазинов</small>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <small>Просмотр статистики</small>
+                        </li>
+                        <li>
+                            <i class="fas fa-check text-success me-2"></i>
+                            <small>Персональная коллекция</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

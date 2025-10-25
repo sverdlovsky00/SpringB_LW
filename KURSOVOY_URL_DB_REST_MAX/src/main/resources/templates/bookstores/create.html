@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title>Добавить магазин</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Добавить новый магазин</h1>
+                <a th:href="@{/bookstores}" class="btn btn-secondary">Назад к списку</a>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{/bookstores/create}" th:object="${bookstore}" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Название магазина *</label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Адрес</label>
+                            <input type="text" class="form-control" id="address" th:field="*{address}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="city" class="form-label">Город</label>
+                            <input type="text" class="form-control" id="city" th:field="*{city}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Телефон</label>
+                            <input type="text" class="form-control" id="phone" th:field="*{phone}">
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">Добавить магазин</button>
+                            <a th:href="@{/bookstores}" class="btn btn-secondary">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

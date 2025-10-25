@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title>Статистика и расчеты</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>📊 Статистика и расчеты</h1>
+        <a th:href="@{/}" class="btn btn-secondary">На главную</a>
+    </div>
+
+    <!-- Основная статистика -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">💰 Финансовая статистика</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>Общая стоимость книг:</strong>
+                        <span class="float-end text-success" th:text="|${#numbers.formatDecimal(totalBooks, 1, 2)} ₽|"></span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Средняя цена книги:</strong>
+                        <span class="float-end" th:text="|${#numbers.formatDecimal(averagePrice, 1, 2)} ₽|"></span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Годовой оборот (прогноз):</strong>
+                        <span class="float-end text-info" th:text="|${#numbers.formatDecimal(annualTurnover, 1, 2)} ₽|"></span>
+                    </div>
+                    <div class="mb-0">
+                        <strong>Рентабельность (прогноз):</strong>
+                        <span class="float-end text-success" th:text="|${#numbers.formatDecimal(profitability, 1, 2)} ₽|"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">📚 Экстремальные значения</h5>
+                </div>
+                <div class="card-body">
+                    <div th:if="${mostExpensiveBook != null}" class="mb-3">
+                        <strong>Самая дорогая книга:</strong>
+                        <div class="float-end text-end">
+                            <span th:text="${mostExpensiveBook.title}"></span><br>
+                            <small class="text-danger" th:text="|${#numbers.formatDecimal(mostExpensiveBook.price, 1, 2)} ₽|"></small>
+                        </div>
+                    </div>
+                    <div th:if="${cheapestBook != null}">
+                        <strong>Самая дешевая книга:</strong>
+                        <div class="float-end text-end">
+                            <span th:text="${cheapestBook.title}"></span><br>
+                            <small class="text-success" th:text="|${#numbers.formatDecimal(cheapestBook.price, 1, 2)} ₽|"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статистика по магазинам -->
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">🏪 Статистика по магазинам</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Магазин</th>
+                                <th>Количество книг</th>
+                                <th>Общая стоимость</th>
+                                <th>Средняя цена</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="store : ${booksPerBookstore}">
+                                <td th:text="${store.key}"></td>
+                                <td th:text="${store.value}"></td>
+                                <td th:text="|${#numbers.formatDecimal(valuePerBookstore.get(store.key), 1, 2)} ₽|"></td>
+                                <td th:text="|${#numbers.formatDecimal(averagePricePerBookstore.get(store.key), 1, 2)} ₽|"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статистика по авторам -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">✍️ Статистика по авторам</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div th:each="author : ${booksPerAuthor}" class="col-md-4 mb-2">
+                            <div class="d-flex justify-content-between">
+                                <span th:text="${author.key}"></span>
+                                <span class="badge bg-primary" th:text="${author.value}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Информация о расчетах -->
+    <div class="card mt-4">
+        <div class="card-header bg-light">
+            <h6 class="mb-0">ℹ️ Примечания к расчетам</h6>
+        </div>
+        <div class="card-body">
+            <small class="text-muted">
+                • Годовой оборот рассчитывается как 5-кратная стоимость всех книг<br>
+                • Рентабельность рассчитывается как 30% от общей стоимости книг<br>
+                • Все финансовые расчеты являются прогнозными
+            </small>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

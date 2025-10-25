@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title>Добавить книгу</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Добавить новую книгу</h1>
+                <a th:href="@{/books}" class="btn btn-secondary">Назад к списку</a>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{/books/create}" th:object="${book}" method="post">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Название книги *</label>
+                            <input type="text" class="form-control" id="title" th:field="*{title}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="author" class="form-label">Автор *</label>
+                            <input type="text" class="form-control" id="author" th:field="*{author}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="isbn" class="form-label">ISBN</label>
+                            <input type="text" class="form-control" id="isbn" th:field="*{isbn}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Цена *</label>
+                            <input type="number" class="form-control" id="price" th:field="*{price}" step="0.01" min="0" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="bookstoreId" class="form-label">Книжный магазин</label>
+                            <select class="form-control" id="bookstoreId" name="bookstoreId">
+                                <option value="">-- Выберите магазин --</option>
+                                <option th:each="store : ${bookstores}"
+                                        th:value="${store.id}"
+                                        th:text="${store.name}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">Добавить книгу</button>
+                            <a th:href="@{/books}" class="btn btn-secondary">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

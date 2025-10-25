@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title>О приложении</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>О приложении Bookstore</h1>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Информация о разработчике</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Разработчик:</strong> Михаил Бабенко</p>
+                    <p><strong>Версия приложения:</strong> 1.0.0</p>
+                    <p><strong>Дата разработки:</strong> 2025</p>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Описание приложения</h5>
+                </div>
+                <div class="card-body">
+                    <p>Bookstore App - это веб-приложение для управления коллекцией книг и информацией о книжных магазинах.</p>
+
+                    <h6>Основные возможности:</h6>
+                    <ul>
+                        <li>📚 Управление каталогом книг</li>
+                        <li>🏪 Ведение списка книжных магазинов</li>
+                        <li>💰 Отслеживание стоимости книг</li>
+                        <li>🔐 Система ролей пользователей</li>
+                    </ul>
+
+                    <h6>Технологии:</h6>
+                    <ul>
+                        <li>Spring Boot</li>
+                        <li>H2 Database</li>
+                        <li>Thymeleaf</li>
+                        <li>Bootstrap 5</li>
+                        <li>Spring Security</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a th:href="@{/}" class="btn btn-secondary">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

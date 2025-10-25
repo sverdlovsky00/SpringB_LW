@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title>Вход в систему</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">
+                        <i class="fas fa-sign-in-alt me-2"></i>Вход в систему
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Alerts -->
+                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <span th:text="${error}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
+                    <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span th:text="${message}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-user me-2"></i>Имя пользователя
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <input type="text" class="form-control" id="username" name="username"
+                                       placeholder="Введите имя пользователя" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock me-2"></i>Пароль
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Введите пароль" required>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Войти в систему
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Additional Links -->
+                    <div class="text-center mt-4">
+                        <p class="mb-3">Еще нет аккаунта?</p>
+                        <a th:href="@{/register}" class="btn btn-outline-primary">
+                            <i class="fas fa-user-plus me-2"></i>Зарегистрироваться
+                        </a>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <a th:href="@{/}" class="btn btn-link text-decoration-none">
+                            <i class="fas fa-arrow-left me-2"></i>Вернуться на главную
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Accounts Info -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <i class="fas fa-info-circle me-2 text-info"></i>Тестовые аккаунты
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <small class="text-muted">Администратор</small><br>
+                            <strong>admin / admin</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <small class="text-muted">Пользователь</small><br>
+                            <strong>user / user</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <small class="text-muted">Чтение</small><br>
+                            <strong>reader / reader</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
